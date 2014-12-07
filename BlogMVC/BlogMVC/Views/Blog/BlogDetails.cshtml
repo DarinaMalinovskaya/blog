@@ -1,0 +1,86 @@
+﻿@using BlogMVC.Models
+@using Microsoft.AspNet.Identity
+@model BlogMVC.Models.BlogViewModel
+
+@{
+    ViewBag.Title = "BlogDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>BlogDetails</h2>
+
+<div>
+    <h4>BlogViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.Id)
+
+    </dl>
+</div>
+
+@*<div>
+    @using (Html.BeginForm("CreateBlog", "Blog", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>BlogViewModel</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>*@
+
+@Html.Partial("_ListCommentPartial", Model.Comments.Select(comment => new CommentViewModel(comment, HttpContext.Current.User.Identity.GetUserName())))
+@Html.Partial("_CreateCommentPartial", Model.CommentViewModel)
+
+<p>
+    @Html.ActionLink("Edit", "EditBlog", "Blog", new { blogId = Model.Id }, new object())
+    @Html.ActionLink("Back to List", "Index", "Blog")
+</p>

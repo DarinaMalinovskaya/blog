@@ -1,0 +1,24 @@
+﻿@model IEnumerable<BlogMVC.Models.BlogViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateBlog", "Blog")
+</p>
+
+@foreach (var item in Model)
+{
+    <div>
+        <p>Create Date - @item.CreateDate</p>
+        <p>@item.Title</p>
+        <p>@item.Body</p>
+        @Html.ActionLink("Edit", "EditBlog", "Blog", new { blogId = item.Id }, new object())
+        @Html.ActionLink("Details", "BlogDetails", "Blog",  new { blogId = item.Id }, new object())
+        @*@Html.ActionLink("Delete", "Delete", new { blogId = item.Id })*@
+    </div>
+}

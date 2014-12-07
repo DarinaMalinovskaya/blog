@@ -1,0 +1,13 @@
+﻿@model IEnumerable<BlogMVC.Models.CommentViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="form-horizontal">
+        @Html.HiddenFor(modelItem => item.UserId)
+        @Html.HiddenFor(modelItem => item.BlogId)
+        <div class="col-md-10">@Html.DisplayFor(modelItem => item.CreateDate)</div>
+        <div class="col-md-10">@Html.DisplayFor(modelItem => item.UserName)</div>
+        <div class="col-md-10">@Html.DisplayFor(modelItem => item.Text)</div>
+        <hr />
+    </div>
+}
